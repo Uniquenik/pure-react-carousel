@@ -24,9 +24,9 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
     }, [children, infiniteLoop, showSlides])
 
 
-    useEffect(() => {
-        let timer = setInterval(() => next(), 4000);
-    })
+    // useEffect(() => {
+    //     let timer = setInterval(() => next(), 4000);
+    // })
 
     useEffect(() => {
         setCurrentIndex(0)
