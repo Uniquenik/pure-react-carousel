@@ -1,0 +1,34 @@
+$accent-color: #527CCD;
+
+.card-padding {
+  min-height: 100%;
+}
+
+.card {
+  border: 1px solid $accent-color;
+  box-sizing: inherit;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 400;
+  color: $accent-color;
+
+}
+
+.card-date {
+  font-size: 12px;
+  line-height: 22px;
+  opacity: 0.6;
+}
+
+.card-title {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.card-description{
+  font-size: 12px;
+  line-height: 22px;
+}

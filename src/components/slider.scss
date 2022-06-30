@@ -1,0 +1,101 @@
+$accent-color: #527CCD;
+
+.slider {
+  width: 100%;
+  color: $accent-color
+}
+
+.slider-header {
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 60px;
+  padding: 120px 20px 40px;
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar-track {
+  width: 360px;
+  border: 1px solid #C8D9FB;
+}
+
+.bar {
+  border: 1px solid $accent-color;
+}
+
+.slider-header-grow {
+  flex-grow: 1;
+}
+
+.slider-header-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px
+}
+
+.slider-header-button{
+  height: 60px;
+  width: 60px;
+  flex-shrink: 0;
+  border: 1px solid #C8D9FB;
+  background-color: white;
+  &:hover {
+    background-color: #C8D9FB;
+  }
+}
+
+.slider-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  user-select: none;
+}
+
+.slider-wrapper {
+  display: flex;
+  position: relative;
+}
+
+.slider-content-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.slider-content {
+  display: flex;
+  transition: all 250ms linear;
+  -ms-overflow-style: none;  /* hide scrollbar in IE and Edge */
+  scrollbar-width: none;  /* hide scrollbar in Firefox */
+}
+
+/* hide scrollbar in webkit browser */
+.slider-content::-webkit-scrollbar, .carousel-content::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-content > * {
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.slider-content.show-2 > * {
+  width: 50%;
+}
+
+.slider-content.show-3 > * {
+  width: calc(100% / 3);
+}
+
+.slider-content.show-4 > * {
+  width: calc(100% / 4);
+}
