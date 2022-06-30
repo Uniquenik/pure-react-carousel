@@ -118,7 +118,7 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className={'slider-header-buttons'}>
                             <button onClick={() => prev()} className={'slider-header-button'}>
                                 <img src={ArrowLeft}/>
                             </button>
