@@ -3,6 +3,7 @@ import './slider.scss'
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import ArrowLeft from '../shared/arrow-left.svg'
 import ArrowRight from '../shared/arrow-right.svg'
+import {clearInterval} from "timers";
 
 const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boolean}) => {
     const fixedWidth = 260
@@ -22,6 +23,10 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
         setLength(React.Children.count(children))
     }, [children, infiniteLoop, showSlides])
 
+
+    useEffect(() => {
+        let timer = setInterval(() => next(), 4000);
+    })
 
     useEffect(() => {
         setCurrentIndex(0)
