@@ -1,30 +1,28 @@
 import React, {useEffect, useState} from 'react'
 import useWindowDimensions from "../hooks/useWindowDimensions";
-import ArrowLeft from '../shared/arrow-left.svg'
-import ArrowRight from '../shared/arrow-right.svg';
+import ArrowLeft from '../shared/images/arrow-left.svg'
+import ArrowRight from '../shared/images/arrow-right.svg';
 import './slider.scss'
 
-const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boolean}) => {
+
+const Slider = (props: { children: React.ReactNode, title: string, infiniteLoop: boolean }) => {
+    // set width card only in one place
     const fixedWidth = 260
-    // задаем ширину карточки только в одном месте
+    const fixedProgressbar = 360;
     const margin = 40
 
-    const {children , infiniteLoop} = props
-    const { width } = useWindowDimensions();
+    const {children, infiniteLoop} = props
+    const {width} = useWindowDimensions();
 
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const [length, setLength] = useState(React.Children.count(children))
-    const [showSlides, setShowSlides] = useState(1)
-
-    const [touchPosition, setTouchPosition] = useState<number | null>()
-
-    useEffect(() => {
-        setLength(React.Children.count(children))
-    }, [children, infiniteLoop, showSlides])
-
+    const [currentIndex, setCurrentIndex] = useState<number>(0)
+    const [length, setLength] = useState<number>(React.Children.count(children))
+    const [showSlides, setShowSlides] = useState<number>(1)
+    const [startPosition, setStartPosition] = useState<number | null>()
 
     useEffect(() => {
-        let timer = setInterval(() => next(), 4000);
+        let timer = setInterval(
+            () => next(),
+            4000);
         return (() => {
             clearInterval(timer)
         })
@@ -50,6 +48,11 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
         }
     }, [width])
 
+    useEffect(() => {
+        setLength(React.Children.count(children))
+    }, [children])
+
+
 
     const next = () => {
         if (currentIndex < (length - showSlides)) {
@@ -70,55 +73,48 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
     }
 
 
-    const handleMouseDown = (e:React.MouseEvent<Element, MouseEvent>) => {
-        setTouchPosition(e.clientX)
+    const handleMouseDown = (e: React.MouseEvent<Element, MouseEvent>) => {
+        setStartPosition(e.clientX)
     }
 
-    const handleTouchStart = (e:React.TouchEvent) => {
-        setTouchPosition(e.touches[0].clientX)
+    const handleTouchStart = (e: React.TouchEvent) => {
+        setStartPosition(e.touches[0].clientX)
     }
 
-    const handleTouchMove = (e:React.TouchEvent) => {
+    const handleTouchMove = (e: React.TouchEvent) => {
         pointsDiff(e.touches[0].clientX)
     }
 
-    const pointsDiff = (point:number) => {
-        const pointDown = touchPosition
-
-        if(pointDown) {
-            const diff = pointDown - point
-
-            if (diff > 5) {
-                next()
-            }
-            if (diff < -5) {
-                prev()
-            }
-            setTouchPosition(null)
+    const pointsDiff = (point: number) => {
+        if (startPosition) {
+            const diff = startPosition - point
+            if (diff > 5) next()
+            if (diff < -5) prev()
+            setStartPosition(null)
         }
     }
 
-    const handleMouseMove = (e:React.MouseEvent<Element, MouseEvent>) => {
+    const handleMouseMove = (e: React.MouseEvent<Element, MouseEvent>) => {
         pointsDiff(e.clientX)
     }
 
     return (
         <div className={'slider-container'}>
             <div className="slider"
-                 style={{width: showSlides * (fixedWidth + margin) }}>
+                 style={{width: showSlides * (fixedWidth + margin)}}>
                 <div className={'slider-header'}>
                     <div>
                         {props.title}
                     </div>
-                    <div className={'slider-header-grow'}> </div>
+                    <div className={'slider-header-grow'}></div>
                     <div className={'slider-header-right'}>
                         <div className={'slider-header-bar'}>
                             <div className={'bar-track'}>
                                 <div className={'bar'}
                                      style={{
-                                         marginLeft: 360/(length-showSlides+1)*currentIndex,
-                                         width: 360/(length-showSlides+1)
-                                    }}>
+                                         marginLeft: fixedProgressbar / (length - showSlides + 1) * currentIndex,
+                                         width: fixedProgressbar / (length - showSlides + 1)
+                                     }}>
                                 </div>
                             </div>
                         </div>
