@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {SliderCard} from "./shared/slider-card";
 import Slider from "./components/slider";
 
@@ -41,6 +41,7 @@ const cardsInfo = [
     text: 'Премьера клипа «Космические силы» группы «Мумий Тролль» состоялась 6 ноября 2020 года.'
   },
 ]
+
 
 function App() {
 

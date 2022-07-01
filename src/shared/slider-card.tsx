@@ -10,7 +10,7 @@ export const SliderCard = (props:{
     return(
         <div className={'card-padding'}>
             <div className={'card'}>
-                <img className={'card-image'} src={Placeholder}/>
+                <img className={'card-image'} src={Placeholder} alt={'card-img'}/>
                 <div className={'card-date'}>
                     {props.date}
                 </div>

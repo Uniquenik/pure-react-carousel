@@ -1,9 +1,8 @@
-import React, {MouseEventHandler, useEffect, useState} from 'react'
-import './slider.scss'
+import React, {useEffect, useState} from 'react'
 import useWindowDimensions from "../hooks/useWindowDimensions";
 import ArrowLeft from '../shared/arrow-left.svg'
-import ArrowRight from '../shared/arrow-right.svg'
-import {clearInterval} from "timers";
+import ArrowRight from '../shared/arrow-right.svg';
+import './slider.scss'
 
 const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boolean}) => {
     const fixedWidth = 260
@@ -24,9 +23,12 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
     }, [children, infiniteLoop, showSlides])
 
 
-    // useEffect(() => {
-    //     let timer = setInterval(() => next(), 4000);
-    // })
+    useEffect(() => {
+        let timer = setInterval(() => next(), 4000);
+        return (() => {
+            clearInterval(timer)
+        })
+    })
 
     useEffect(() => {
         setCurrentIndex(0)
@@ -83,18 +85,15 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
     const pointsDiff = (point:number) => {
         const pointDown = touchPosition
 
-        if(pointDown !== null) {
-            // @ts-ignore
+        if(pointDown) {
             const diff = pointDown - point
 
             if (diff > 5) {
                 next()
             }
-
             if (diff < -5) {
                 prev()
             }
-
             setTouchPosition(null)
         }
     }
@@ -125,10 +124,10 @@ const Slider = (props:{children:React.ReactNode, title:string, infiniteLoop: boo
                         </div>
                         <div className={'slider-header-buttons'}>
                             <button onClick={() => prev()} className={'slider-header-button'}>
-                                <img src={ArrowLeft}/>
+                                <img alt={'arrow-left'} src={ArrowLeft}/>
                             </button>
                             <button onClick={() => next()} className={'slider-header-button'}>
-                                <img src={ArrowRight}/>
+                                <img alt={'arrow-right'} src={ArrowRight}/>
                             </button>
                         </div>
                     </div>
