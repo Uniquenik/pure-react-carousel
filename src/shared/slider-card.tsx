@@ -1,13 +1,14 @@
 import './slider-card.scss'
-import Placeholder from './placeholder.svg'
+import Placeholder from './images/placeholder.svg'
 
-export const SliderCard = (props:{
-    title:string,
+export const SliderCard = (props: {
+    title: string,
     date: string,
     description: string,
-    id: number}) => {
+    id: number
+}) => {
 
-    return(
+    return (
         <div className={'card-padding'}>
             <div className={'card'}>
                 <img className={'card-image'} src={Placeholder} alt={'card-img'}/>
